@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "author": "MineGuard",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnA",
+      "top": -60,
+      "left": -150,
+      "attrs": { "color": "blue", "label": "Reader A" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnB",
+      "top": 10,
+      "left": -150,
+      "attrs": { "color": "blue", "label": "Reader B" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnTag",
+      "top": 80,
+      "left": -150,
+      "attrs": { "color": "yellow", "label": "Next tag" }
+    },
+    { "type": "wokwi-led", "id": "led_entry", "top": 190, "left": -230, "attrs": { "color": "green" } },
+    { "type": "wokwi-led", "id": "led_exit", "top": 190, "left": -170, "attrs": { "color": "red" } },
+    { "type": "wokwi-led", "id": "led_ign", "top": 190, "left": -110, "attrs": { "color": "yellow" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 250, "left": -240, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 250, "left": -180, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r3", "top": 250, "left": -120, "rotate": 90, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "esp:32", "btnA:1.l", "green", [] ],
+    [ "btnA:2.l", "esp:GND.1", "black", [] ],
+
+    [ "esp:33", "btnB:1.l", "green", [] ],
+    [ "btnB:2.l", "esp:GND.1", "black", [] ],
+
+    [ "esp:25", "btnTag:1.l", "green", [] ],
+    [ "btnTag:2.l", "esp:GND.1", "black", [] ],
+
+    [ "esp:26", "r1:1", "green", [] ],
+    [ "r1:2", "led_entry:A", "green", [] ],
+    [ "led_entry:C", "esp:GND.1", "black", [] ],
+
+    [ "esp:27", "r2:1", "red", [] ],
+    [ "r2:2", "led_exit:A", "red", [] ],
+    [ "led_exit:C", "esp:GND.1", "black", [] ],
+
+    [ "esp:14", "r3:1", "gold", [] ],
+    [ "r3:2", "led_ign:A", "gold", [] ],
+    [ "led_ign:C", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

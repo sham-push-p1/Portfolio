@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": -4.76, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -76.5, "left": -159, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": -63.38, "left": 155.92, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 159.8,
+      "left": 172.8,
+      "attrs": { "color": "red", "xray": "1" }
+    },
+    { "type": "wokwi-slide-switch", "id": "sw1", "top": 254, "left": 214.3, "attrs": {} },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -36,
+      "left": -228.6,
+      "attrs": { "volume": "0.1" }
+    },
+    { "type": "wokwi-gas-sensor", "id": "mq7", "top": -230, "left": -140, "attrs": {} },
+    { "type": "wokwi-gas-sensor", "id": "mq135", "top": -230, "left": 20, "attrs": {} },
+    { "type": "wokwi-gas-sensor", "id": "mq4", "top": -230, "left": 180, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot_hr", "top": -350, "left": -140, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot_spo2", "top": -350, "left": 20, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_motor",
+      "top": 120,
+      "left": -230,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_motor",
+      "top": 190,
+      "left": -230,
+      "attrs": { "color": "blue" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:15", "dht1:SDA", "green", [ "v0", "h38.4", "v124.8", "h-259.2" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "imu1:VCC", "esp:3V3", "red", [ "v-57.6", "h-239.92", "v9.6" ] ],
+    [
+      "imu1:GND",
+      "esp:GND.1",
+      "black",
+      [ "v-48", "h0.08", "v9.6", "h-249.6", "v211.2", "h0", "v76.8", "h0" ]
+    ],
+    [ "imu1:SCL", "esp:22", "green", [ "v0" ] ],
+    [ "imu1:SDA", "esp:21", "green", [ "v-28.8", "h0.08", "v201.6", "h-105.6" ] ],
+    [ "esp:13", "btn1:1.l", "green", [ "h-86.25", "v153.6", "h249.6", "v-144" ] ],
+    [ "esp:27", "sw1:2", "green", [ "h-76.65", "v220.8", "h19.2" ] ],
+    [ "esp:GND.3", "sw1:1", "black", [ "h86.4", "v211.2" ] ],
+    [ "btn1:2.r", "esp:GND.3", "green", [ "h19.4", "v-105.4" ] ],
+    [ "bz1:2", "esp:25", "green", [ "v28.8", "h-0.4", "h191.85" ] ],
+    [ "esp:GND.1", "bz1:1", "black", [ "h-201.45" ] ],
+    [ "mq7:AOUT", "esp:34", "orange", [ "v0" ] ],
+    [ "mq7:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "mq7:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "mq135:AOUT", "esp:35", "orange", [ "v0" ] ],
+    [ "mq135:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "mq135:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "mq4:AOUT", "esp:32", "orange", [ "v0" ] ],
+    [ "mq4:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "mq4:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "pot_hr:SIG", "esp:VP", "purple", [ "v0" ] ],
+    [ "pot_hr:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "pot_hr:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "pot_spo2:SIG", "esp:VN", "purple", [ "v0" ] ],
+    [ "pot_spo2:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "pot_spo2:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "esp:26", "r_motor:1", "blue", [ "v0" ] ],
+    [ "r_motor:2", "led_motor:A", "blue", [ "v0" ] ],
+    [ "led_motor:C", "esp:GND.1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
